@@ -32,6 +32,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
 
     private GameTheme theme;
     private MapGenerator mapPlay;
+    private GamePaint gamePaint;
 
     public GamePlay() {
         mapPlay = new MapGenerator(4, 10);
@@ -46,126 +47,56 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
 
     @Override
     public void paint(Graphics graphics) {
-        //background
-        graphics.setColor(theme.scene);
-        graphics.fillRect(1, 1, 692, 592);
+        gamePaint = new GamePaint(graphics, theme, score);
+        boolean isBallFallInDown = ballPosY > 570;
+        boolean isTotalBricks = totalBricks <= 0;
 
-        //drawing map of bricks
+        // background
+        gamePaint.paintScene();
+
+        // drawing map of bricks
         mapPlay.draw((Graphics2D) graphics, theme.sceneContrast);
 
-        //border
-        graphics.setColor(theme.secondary);
-        graphics.fillRect(0, 0, 3, 592);
-        graphics.fillRect(0, 0, 692, 3);
-        graphics.fillRect(691, 1, 3, 592);
+        gamePaint.paintSceneBorder();
+        gamePaint.score(false);
+        gamePaint.paddle(playerX, false);
 
-        //score
-        graphics.setColor(theme.sceneContrast);
-        graphics.setFont(theme.body2);
-        graphics.drawString("Score: " + score + "/200", 490, 30);
-
-        //paddle
-        graphics.setColor(theme.primary);
-        graphics.fillRect(playerX, 550, 100, 8);
+        gamePaint.ballScore(ballPosX, ballPosY);
 
         if (play == false) {
-            //game start message
-            graphics.setColor(theme.secondary);
-            graphics.setFont(theme.subtitle);
-            graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
-
-            //ball hiding
-            graphics.setColor(theme.scene);
-            graphics.fillOval(ballPosX, ballPosY, 20, 20);
+            gamePaint.messageGameStart(false);
+            gamePaint.ballHiding(ballPosX, ballPosY);
         } else {
-            //ball showing
-            graphics.setColor(theme.primary);
-            graphics.fillOval(ballPosX, ballPosY, 20, 20);
+            gamePaint.ballGameStart(ballPosX, ballPosY);
         }
 
-        if (score >= 50 && score < 100) {
-            //ball color & size change
-            graphics.setColor(theme.secondary);
-            graphics.fillOval(ballPosX, ballPosY, 21, 21);
-        } else if (score >= 100 && score < 150) {
-            //ball
-            graphics.setColor(theme.secondaryContrast);
-            graphics.fillOval(ballPosX, ballPosY, 22, 22);
-        } else if (score >= 150) {
-            //ball
-            graphics.setColor(theme.warning);
-            graphics.fillOval(ballPosX, ballPosY, 23, 23);
-        }
-
-        if (totalBricks <= 0) {
+        if (isTotalBricks || isBallFallInDown) {
             play = false;
             ballDirX = 0;
             ballDirY = 0;
 
-            //hiding the ball after game over
-            graphics.setColor(theme.scene);
-            graphics.fillOval(ballPosX, ballPosY, 23, 23);
-
-            graphics.setColor(theme.warning);
-            graphics.setFont(theme.title);
-            graphics.drawString("You Win! Score: " + score, 200, 300);
-
-            graphics.setColor(theme.secondary);
-            graphics.setFont(theme.body1);
-            graphics.drawString("Press Enter to Restart..", 230, 330);
-
-            //above score hiding
-            graphics.setColor(theme.scene);
-            graphics.setFont(theme.body2);
-            graphics.drawString("Score: " + score + "/200", 490, 30);
-
-            //hide remains bricks
-            mapPlay.draw((Graphics2D) graphics, theme.scene);
-
-            //paddle
-            graphics.setColor(theme.scene);
-            graphics.fillRect(playerX, 550, 100, 8);
-
-            //game start message
-            graphics.setColor(theme.scene);
-            graphics.setFont(theme.subtitle);
-            graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
+            gamePaint.ballHiding(ballPosX, ballPosY);
         }
 
-        if (ballPosY > 570) { // if ball fall in down
-            play = false;
-            ballDirX = 0;
-            ballDirY = 0;
+        if (isTotalBricks) {
+            gamePaint.messageGameWin();
+        }
 
-            //hiding the ball after game over
-            graphics.setColor(theme.scene);
-            graphics.fillOval(ballPosX, ballPosY, 23, 23);
+        if (isBallFallInDown) {
+            gamePaint.messageGameOver();
+        }
 
-            graphics.setColor(theme.warning);
-            graphics.setFont(theme.title);
-            graphics.drawString("Game over! Score: " + score, 200, 300);
+        if (isTotalBricks || isBallFallInDown) {
+            gamePaint.messageGameRestart();
+            gamePaint.score(true);
 
-            graphics.setColor(theme.secondary);
-            graphics.setFont(theme.body1);
-            graphics.drawString("Press Enter to Restart..", 230, 330);
-
-            //above score hiding
-            graphics.setColor(theme.scene);
-            graphics.setFont(theme.body2);
-            graphics.drawString("Score: " + score + "/200", 490, 30);
-
-            //hide remains bricks
+            // hide remains bricks
             mapPlay.draw((Graphics2D) graphics, theme.scene);
 
-            //paddle
-            graphics.setColor(theme.scene);
-            graphics.fillRect(playerX, 550, 100, 8);
-
-            //game start message
-            graphics.setColor(theme.scene);
-            graphics.setFont(theme.subtitle);
-            graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
+            gamePaint.paddle(playerX, true);
+            gamePaint.messageGameStart(true);
         }
+
         graphics.dispose();
     }
 

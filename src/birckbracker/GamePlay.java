@@ -30,10 +30,12 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
     private int ballDirX = getRandomNumberForX();
     private int ballDirY = getRandomNumberForY();
 
+    private GameTheme theme;
     private MapGenerator mapPlay;
 
     public GamePlay() {
         mapPlay = new MapGenerator(4, 10);
+        theme = new GameTheme();
 
         addKeyListener(this);
         setFocusable(true);
@@ -45,53 +47,53 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
     @Override
     public void paint(Graphics graphics) {
         //background
-        graphics.setColor(Color.black);
+        graphics.setColor(theme.scene);
         graphics.fillRect(1, 1, 692, 592);
 
         //drawing map of bricks
-        mapPlay.draw((Graphics2D) graphics, Color.WHITE);
+        mapPlay.draw((Graphics2D) graphics, theme.sceneContrast);
 
         //border
-        graphics.setColor(Color.yellow);
+        graphics.setColor(theme.secondary);
         graphics.fillRect(0, 0, 3, 592);
         graphics.fillRect(0, 0, 692, 3);
         graphics.fillRect(691, 1, 3, 592);
 
         //score
-        graphics.setColor(Color.white);
+        graphics.setColor(theme.sceneContrast);
         graphics.setFont(new Font("serif", Font.BOLD, 22));
         graphics.drawString("Score: " + score + "/200", 490, 30);
 
         //paddle
-        graphics.setColor(Color.green);
+        graphics.setColor(theme.primary);
         graphics.fillRect(playerX, 550, 100, 8);
 
         if (play == false) {
             //game start message
-            graphics.setColor(Color.YELLOW);
+            graphics.setColor(theme.secondary);
             graphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
             graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
 
             //ball hiding
-            graphics.setColor(Color.black);
+            graphics.setColor(theme.scene);
             graphics.fillOval(ballPosX, ballPosY, 20, 20);
         } else {
             //ball showing
-            graphics.setColor(Color.green);
+            graphics.setColor(theme.primary);
             graphics.fillOval(ballPosX, ballPosY, 20, 20);
         }
 
         if (score >= 50 && score < 100) {
             //ball color & size change
-            graphics.setColor(Color.yellow);
+            graphics.setColor(theme.secondary);
             graphics.fillOval(ballPosX, ballPosY, 21, 21);
         } else if (score >= 100 && score < 150) {
             //ball
-            graphics.setColor(Color.orange);
+            graphics.setColor(theme.secondaryContrast);
             graphics.fillOval(ballPosX, ballPosY, 22, 22);
         } else if (score >= 150) {
             //ball
-            graphics.setColor(Color.red);
+            graphics.setColor(theme.warning);
             graphics.fillOval(ballPosX, ballPosY, 23, 23);
         }
 
@@ -101,31 +103,31 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
             ballDirY = 0;
 
             //hiding the ball after game over
-            graphics.setColor(Color.black);
+            graphics.setColor(theme.scene);
             graphics.fillOval(ballPosX, ballPosY, 23, 23);
 
-            graphics.setColor(Color.RED);
+            graphics.setColor(theme.warning);
             graphics.setFont(new Font("serif", Font.BOLD, 30));
             graphics.drawString("You Win! Score: " + score, 200, 300);
 
-            graphics.setColor(Color.YELLOW);
+            graphics.setColor(theme.secondary);
             graphics.setFont(new Font("serif", Font.BOLD, 20));
             graphics.drawString("Press Enter to Restart..", 230, 330);
 
             //above score hiding
-            graphics.setColor(Color.black);
+            graphics.setColor(theme.scene);
             graphics.setFont(new Font("serif", Font.BOLD, 22));
             graphics.drawString("Score: " + score + "/200", 490, 30);
 
             //hide remains bricks
-            mapPlay.draw((Graphics2D) graphics, Color.BLACK);
+            mapPlay.draw((Graphics2D) graphics, theme.scene);
 
             //paddle
-            graphics.setColor(Color.black);
+            graphics.setColor(theme.scene);
             graphics.fillRect(playerX, 550, 100, 8);
 
             //game start message
-            graphics.setColor(Color.BLACK);
+            graphics.setColor(theme.scene);
             graphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
             graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
         }
@@ -136,31 +138,31 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
             ballDirY = 0;
 
             //hiding the ball after game over
-            graphics.setColor(Color.black);
+            graphics.setColor(theme.scene);
             graphics.fillOval(ballPosX, ballPosY, 23, 23);
 
-            graphics.setColor(Color.RED);
+            graphics.setColor(theme.warning);
             graphics.setFont(new Font("serif", Font.BOLD, 30));
-            graphics.drawString("Game over! Score: " + score, 200, 300);
+            graphics.drawString("123: Game over! Score: " + score, 200, 300);
 
-            graphics.setColor(Color.YELLOW);
+            graphics.setColor(theme.secondary);
             graphics.setFont(new Font("serif", Font.BOLD, 20));
             graphics.drawString("Press Enter to Restart..", 230, 330);
 
             //above score hiding
-            graphics.setColor(Color.black);
+            graphics.setColor(theme.scene);
             graphics.setFont(new Font("serif", Font.BOLD, 22));
             graphics.drawString("Score: " + score + "/200", 490, 30);
 
             //hide remains bricks
-            mapPlay.draw((Graphics2D) graphics, Color.BLACK);
+            mapPlay.draw((Graphics2D) graphics, theme.scene);
 
             //paddle
-            graphics.setColor(Color.black);
+            graphics.setColor(theme.scene);
             graphics.fillRect(playerX, 550, 100, 8);
 
             //game start message
-            graphics.setColor(Color.BLACK);
+            graphics.setColor(theme.scene);
             graphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
             graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
         }

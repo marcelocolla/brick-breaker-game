@@ -61,7 +61,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
 
         //score
         graphics.setColor(theme.sceneContrast);
-        graphics.setFont(new Font("serif", Font.BOLD, 22));
+        graphics.setFont(theme.body2);
         graphics.drawString("Score: " + score + "/200", 490, 30);
 
         //paddle
@@ -71,7 +71,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
         if (play == false) {
             //game start message
             graphics.setColor(theme.secondary);
-            graphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
+            graphics.setFont(theme.subtitle);
             graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
 
             //ball hiding
@@ -107,16 +107,16 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
             graphics.fillOval(ballPosX, ballPosY, 23, 23);
 
             graphics.setColor(theme.warning);
-            graphics.setFont(new Font("serif", Font.BOLD, 30));
+            graphics.setFont(theme.title);
             graphics.drawString("You Win! Score: " + score, 200, 300);
 
             graphics.setColor(theme.secondary);
-            graphics.setFont(new Font("serif", Font.BOLD, 20));
+            graphics.setFont(theme.body1);
             graphics.drawString("Press Enter to Restart..", 230, 330);
 
             //above score hiding
             graphics.setColor(theme.scene);
-            graphics.setFont(new Font("serif", Font.BOLD, 22));
+            graphics.setFont(theme.body2);
             graphics.drawString("Score: " + score + "/200", 490, 30);
 
             //hide remains bricks
@@ -128,7 +128,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
 
             //game start message
             graphics.setColor(theme.scene);
-            graphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
+            graphics.setFont(theme.subtitle);
             graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
         }
 
@@ -142,16 +142,16 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
             graphics.fillOval(ballPosX, ballPosY, 23, 23);
 
             graphics.setColor(theme.warning);
-            graphics.setFont(new Font("serif", Font.BOLD, 30));
-            graphics.drawString("123: Game over! Score: " + score, 200, 300);
+            graphics.setFont(theme.title);
+            graphics.drawString("Game over! Score: " + score, 200, 300);
 
             graphics.setColor(theme.secondary);
-            graphics.setFont(new Font("serif", Font.BOLD, 20));
+            graphics.setFont(theme.body1);
             graphics.drawString("Press Enter to Restart..", 230, 330);
 
             //above score hiding
             graphics.setColor(theme.scene);
-            graphics.setFont(new Font("serif", Font.BOLD, 22));
+            graphics.setFont(theme.body2);
             graphics.drawString("Score: " + score + "/200", 490, 30);
 
             //hide remains bricks
@@ -163,7 +163,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
 
             //game start message
             graphics.setColor(theme.scene);
-            graphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
+            graphics.setFont(theme.subtitle);
             graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
         }
         graphics.dispose();

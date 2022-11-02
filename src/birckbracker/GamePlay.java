@@ -1,7 +1,5 @@
 package birckbracker;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -13,8 +11,7 @@ import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePlay extends JPanel implements KeyListener, ActionListener {  //KeyListener detecting arroy key and ActionListener for moving the ball 
-
+public class GamePlay extends JPanel implements KeyListener, ActionListener {  //KeyListener detecting arroy key and ActionListener for moving the ball
     private boolean play = false;
     public int score = 0;
 
@@ -31,12 +28,14 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
     private int ballDirY = getRandomNumberForY();
 
     private GameTheme theme;
+    private GameStage stage;
     private MapGenerator mapPlay;
     private GamePaint gamePaint;
 
     public GamePlay() {
         mapPlay = new MapGenerator(4, 10);
-        theme = new GameTheme();
+        stage = new GameStage(592, 32);
+        theme = new GameTheme(stage);
 
         addKeyListener(this);
         setFocusable(true);
@@ -48,7 +47,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
     @Override
     public void paint(Graphics graphics) {
         gamePaint = new GamePaint(graphics, theme, score);
-        boolean isBallFallInDown = ballPosY > 570;
+        boolean isBallFallInDown = ballPosY > theme.stage.ballFallInDown;
         boolean isTotalBricks = totalBricks <= 0;
 
         // background

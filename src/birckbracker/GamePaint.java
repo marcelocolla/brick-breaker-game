@@ -1,7 +1,6 @@
 package birckbracker;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 public class GamePaint {
@@ -18,14 +17,14 @@ public class GamePaint {
 
     public void paintScene() {
         graphics.setColor(theme.scene);
-        graphics.fillRect(1, 1, 692, 592);
+        graphics.fillRect(1, 1, theme.stage.maxWidth, theme.stage.width);
     }
 
     public void paintSceneBorder() {
         graphics.setColor(theme.secondary);
-        graphics.fillRect(0, 0, 3, 592);
-        graphics.fillRect(0, 0, 692, 3);
-        graphics.fillRect(691, 1, 3, 592);
+        graphics.fillRect(0, 0, 3, theme.stage.width);
+        graphics.fillRect(0, 0, theme.stage.maxWidth, 3);
+        graphics.fillRect(theme.stage.maxWidth, 1, 3, theme.stage.width);
     }
 
     public void setHidden() {
@@ -54,7 +53,7 @@ public class GamePaint {
     }
 
     public void ballScore (int ballPosX, int ballPosY) {
-        int _ballSize = 20;
+        int _ballSize = theme.stage.ballSize;
         Color _color = theme.primary;
 
         if (this.score >= 50 && this.score < 100) {
@@ -74,36 +73,36 @@ public class GamePaint {
 
     public void ballHiding(int ballPosX, int ballPosY) {
         graphics.setColor(theme.scene);
-        graphics.fillOval(ballPosX, ballPosY, 20, 20);
+        graphics.fillOval(ballPosX, ballPosY, theme.stage.ballSize, theme.stage.ballSize);
     }
 
     public void ballGameStart(int ballPosX, int ballPosY) {
         graphics.setColor(theme.primary);
-        graphics.fillOval(ballPosX, ballPosY, 20, 20);
+        graphics.fillOval(ballPosX, ballPosY, theme.stage.ballSize, theme.stage.ballSize);
     }
 
     public void ballGameOver(int ballPosX, int ballPosY) {
         // hiding the ball after game over
         graphics.setColor(theme.primary);
-        graphics.fillOval(ballPosX, ballPosY, 23, 23);
+        graphics.fillOval(ballPosX, ballPosY, theme.stage.ballSize, theme.stage.ballSize);
     }
 
     public void messageGameWin () {
         graphics.setColor(theme.warning);
         graphics.setFont(theme.title);
-        graphics.drawString("You Win! Score: " + this.score, 200, 300);
+        graphics.drawString("You Win! Score: " + this.score, theme.stage.drawTitleX(), theme.stage.drawTitleY());
     }
 
     public void messageGameOver () {
         graphics.setColor(theme.warning);
         graphics.setFont(theme.title);
-        graphics.drawString("Game over! Score: " + this.score, 200, 300);
+        graphics.drawString("Game over! Score: " + this.score, theme.stage.drawTitleX(), theme.stage.drawTitleY());
     }
 
     public void messageGameRestart () {
         graphics.setColor(theme.secondary);
         graphics.setFont(theme.body1);
-        graphics.drawString("Press Enter to Restart..", 230, 330);
+        graphics.drawString("Press Enter to Restart..", theme.stage.drawMessageX(), theme.stage.drawMessageY());
     }
 
     public void messageGameStart (boolean hide) {
@@ -114,6 +113,6 @@ public class GamePaint {
         }
 
         graphics.setFont(theme.subtitle);
-        graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
+        graphics.drawString("Press Enter/Left/Right Arrow to start the game!", theme.stage.drawSubtitleX(), theme.stage.drawSubtitleY());
     }
 }

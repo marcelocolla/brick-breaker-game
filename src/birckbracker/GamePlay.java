@@ -31,6 +31,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
     private int ballDirY = getRandomNumberForY();
 
     private MapGenerator mapPlay;
+    private Graphics graphics;
 
     public GamePlay() {
         mapPlay = new MapGenerator(4, 10);
@@ -44,6 +45,8 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
 
     @Override
     public void paint(Graphics graphics) {
+        this.graphics = graphics;
+
         //background
         graphics.setColor(Color.black);
         graphics.fillRect(1, 1, 692, 592);
@@ -67,10 +70,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
         graphics.fillRect(playerX, 550, 100, 8);
 
         if (play == false) {
-            //game start message
-            graphics.setColor(Color.YELLOW);
-            graphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
-            graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
+            this.gameStartMessage();
 
             //ball hiding
             graphics.setColor(Color.black);
@@ -124,10 +124,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
             graphics.setColor(Color.black);
             graphics.fillRect(playerX, 550, 100, 8);
 
-            //game start message
-            graphics.setColor(Color.BLACK);
-            graphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
-            graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
+            this.gameStartMessage();
         }
 
         if (ballPosY > 570) { // if ball fall in down
@@ -165,6 +162,12 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
             graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
         }
         graphics.dispose();
+    }
+
+    public void gameStartMessage () {
+        graphics.setColor(Color.BLACK);
+        graphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
+        graphics.drawString("Press Enter/Left/Right Arrow to start the game!", 90, 350);
     }
 
     @Override

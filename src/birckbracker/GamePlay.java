@@ -22,8 +22,8 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
 
     private int playerX = 300;
 
-    private int ballPosX = 290;
-    private int ballPosY = 350;
+    private int ballPosX = 0;
+    private int ballPosY = 0;
     private int ballDirX = getRandomNumberForX();
     private int ballDirY = getRandomNumberForY();
 

@@ -2,6 +2,10 @@ package birckbracker;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.net.URL;
+
+import javax.swing.ImageIcon;
 
 public class GamePaint {
     private GameTheme theme;
@@ -15,16 +19,30 @@ public class GamePaint {
         this.score = score;
     }
 
+    private Image getImage(String path) {
+        URL imageURL = getClass().getResource(path);
+
+        if (imageURL == null)
+            return null;
+
+        return new ImageIcon(imageURL).getImage();
+    }
+
     public void paintScene() {
+        Image img = this.getImage("background.jpg");
+
         graphics.setColor(theme.scene);
         graphics.fillRect(1, 1, theme.stage.maxWidth, theme.stage.width);
+        graphics.drawImage(img, 1, 1, null);
     }
 
     public void paintSceneBorder() {
+        int calcWidth = theme.stage.maxWidth + 5;
+
         graphics.setColor(theme.secondary);
         graphics.fillRect(0, 0, 3, theme.stage.width);
-        graphics.fillRect(0, 0, theme.stage.maxWidth, 3);
-        graphics.fillRect(theme.stage.maxWidth, 1, 3, theme.stage.width);
+        graphics.fillRect(0, 0, calcWidth, 3);
+        graphics.fillRect(calcWidth, 1, 3, theme.stage.width);
     }
 
     public void setHidden() {

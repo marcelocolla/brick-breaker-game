@@ -2,11 +2,22 @@ package birckbracker;
 
 import java.awt.Font;
 
-public class GameTheme implements AbstractTheme {
+public class GameTheme extends AbstractTheme {
   public GameStage stage;
 
-  public GameTheme (GameStage stage) {
+  public GameTheme (GameStage stage, AbstractTheme theme) {
     this.stage = stage;
+
+    if (theme == null) {
+      theme = new ThemeDefaultImpl();
+    }
+
+    this.scene = theme.scene;
+    this.sceneContrast = theme.sceneContrast;
+    this.primary = theme.primary;
+    this.secondary = theme.secondary;
+    this.secondaryContrast = theme.secondaryContrast;
+    this.warning = theme.warning;
   }
 
   protected Font textPlain (int size) {

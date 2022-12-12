@@ -46,7 +46,7 @@ public class GamePaint {
         if (hide) {
             this.setHidden();
         } else {
-            graphics.setColor(theme.primary);
+            graphics.setColor(theme.paddleBar);
         }
         
         graphics.fillRect(posX, 550, 100, 8);

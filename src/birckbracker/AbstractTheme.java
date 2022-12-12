@@ -3,7 +3,7 @@ package birckbracker;
 import java.awt.Color;
 import java.awt.Font;
 
-public interface AbstractTheme {
+public class AbstractTheme {
     String fontName = Font.SANS_SERIF;
 
     // Texts styles
@@ -13,12 +13,13 @@ public interface AbstractTheme {
     Font body2 = null;
 
     // Colors styles
-    Color scene = Color.pink;
-    Color sceneContrast = Color.white;
-    Color primary = Color.MAGENTA;
-    Color secondary = Color.yellow;
-    Color secondaryContrast = Color.orange;
-    Color warning = Color.red;
+    Color paddleBar = Color.white;
+    Color scene = null;
+    Color sceneContrast = null;
+    Color primary = null;
+    Color secondary = null;
+    Color secondaryContrast = null;
+    Color warning = null;
 
     // Stage positions
     GameStage stage = null;

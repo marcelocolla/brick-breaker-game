@@ -35,7 +35,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
     public GamePlay() {
         mapPlay = new MapGenerator(4, 10);
         stage = new GameStage(592, 32);
-        theme = new GameTheme(stage);
+        this.theme = new GameTheme(stage, null);
 
         addKeyListener(this);
         setFocusable(true);

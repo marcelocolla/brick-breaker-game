@@ -33,7 +33,7 @@ public class GamePaint {
 
         graphics.setColor(theme.scene);
         graphics.fillRect(1, 1, theme.stage.maxWidth, theme.stage.width);
-        graphics.drawImage(img, 1, 1, null);
+        graphics.drawImage(img, 0, 0, null);
     }
 
     public void paintSceneBorder() {
@@ -124,14 +124,18 @@ public class GamePaint {
     }
 
     public void messageGameStart (boolean hide) {
+        Image img = this.getImage("cenarios.png");
+
         if (hide) {
             graphics.setColor(theme.transparent);
         } else {
             graphics.setColor(theme.secondary);
         }
 
+        graphics.drawImage(img, 200, 72, null);
+
         graphics.setFont(theme.title);
-        graphics.drawString("Pressione Enter para iniciar o jogo!", 60, theme.stage.drawTitleY());
+        graphics.drawString("Pressione Enter para iniciar o jogo!", 60, theme.stage.drawTitleY() + 16);
 
         graphics.setFont(theme.subtitle);
         graphics.drawString("Use as setas Esquerda/Direita para jogar!", 100, theme.stage.drawSubtitleY());

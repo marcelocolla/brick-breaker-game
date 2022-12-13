@@ -6,10 +6,10 @@ public class ThemeAlternativeImpl extends AbstractTheme {
     public ThemeAlternativeImpl () {
         this.scene = Color.white;
         this.sceneContrast = Color.cyan;
-        this.primary = Color.PINK;
+        this.primary = Color.orange;
         this.secondary = Color.cyan;
-        this.secondaryContrast = Color.PINK;
-        this.warning = Color.orange;
+        this.secondaryContrast = Color.orange;
+        this.warning = Color.yellow;
 
         this.bgImage = '2';
     }

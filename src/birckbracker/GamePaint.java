@@ -29,7 +29,7 @@ public class GamePaint {
     }
 
     public void paintScene() {
-        Image img = this.getImage("background.jpg");
+        Image img = this.getImage("background-" + theme.bgImage + ".jpg");
 
         graphics.setColor(theme.scene);
         graphics.fillRect(1, 1, theme.stage.maxWidth, theme.stage.width);
@@ -46,7 +46,7 @@ public class GamePaint {
     }
 
     public void setHidden() {
-        graphics.setColor(theme.scene);
+        graphics.setColor(theme.transparent);
     }
 
     public void score(boolean hide){
@@ -108,29 +108,32 @@ public class GamePaint {
     public void messageGameWin () {
         graphics.setColor(theme.warning);
         graphics.setFont(theme.title);
-        graphics.drawString("You Win! Score: " + this.score, theme.stage.drawTitleX(), theme.stage.drawTitleY());
+        graphics.drawString("Você Venceu! Score: " + this.score, theme.stage.drawTitleX(), theme.stage.drawTitleY());
     }
 
     public void messageGameOver () {
         graphics.setColor(theme.warning);
         graphics.setFont(theme.title);
-        graphics.drawString("Game over! Score: " + this.score, theme.stage.drawTitleX(), theme.stage.drawTitleY());
+        graphics.drawString("Fim de jogo! Score: " + this.score, theme.stage.drawTitleX() - 20, theme.stage.drawTitleY());
     }
 
     public void messageGameRestart () {
         graphics.setColor(theme.secondary);
         graphics.setFont(theme.body1);
-        graphics.drawString("Press Enter to Restart..", theme.stage.drawMessageX(), theme.stage.drawMessageY());
+        graphics.drawString("Pressione Enter para reiniciar", 190, theme.stage.drawMessageY());
     }
 
     public void messageGameStart (boolean hide) {
         if (hide) {
-            graphics.setColor(theme.scene);
+            graphics.setColor(theme.transparent);
         } else {
             graphics.setColor(theme.secondary);
         }
 
+        graphics.setFont(theme.title);
+        graphics.drawString("Pressione Enter para iniciar o jogo!", 60, theme.stage.drawTitleY());
+
         graphics.setFont(theme.subtitle);
-        graphics.drawString("Press Enter/Left/Right Arrow to start the game!", theme.stage.drawSubtitleX(), theme.stage.drawSubtitleY());
+        graphics.drawString("Use as setas Esquerda/Direita para jogar!", 100, theme.stage.drawSubtitleY());
     }
 }

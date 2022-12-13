@@ -13,6 +13,7 @@ public class AbstractTheme {
     Font body2 = null;
 
     // Colors styles
+    Color transparent = new Color(0xffffff);
     Color paddleBar = Color.white;
     Color scene = null;
     Color sceneContrast = null;
@@ -23,4 +24,7 @@ public class AbstractTheme {
 
     // Stage positions
     GameStage stage = null;
+
+    // Background
+    char bgImage = '1';
 }

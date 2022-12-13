@@ -18,6 +18,7 @@ public class GameTheme extends AbstractTheme {
     this.secondary = theme.secondary;
     this.secondaryContrast = theme.secondaryContrast;
     this.warning = theme.warning;
+    this.bgImage = theme.bgImage;
   }
 
   protected Font textPlain (int size) {

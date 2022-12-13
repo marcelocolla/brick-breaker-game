@@ -12,7 +12,7 @@ public class GameStage {
     this.maxWidth = width + 100;
     this.posYBase = width / 2;
     this.spacer = spacer;
-    this.ballFallInDown = width - spacer;
+    this.ballFallInDown = (width + 2) - spacer;
   }
 
   public int calcPosition(int scale) {

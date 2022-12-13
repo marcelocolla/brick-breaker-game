@@ -35,13 +35,21 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
     public GamePlay() {
         mapPlay = new MapGenerator(4, 10);
         stage = new GameStage(592, 32);
-        this.theme = new GameTheme(stage, null);
 
+        createTheme('1');
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         timer = new Timer(delay, this);
         timer.start();
+    }
+
+    private void createTheme(char themeType) {
+        if (themeType == '2') {
+            this.theme = new GameTheme(stage, new ThemeAlternativeImpl());
+        } else {
+            this.theme = new GameTheme(stage, null);
+        }
     }
 
     @Override
@@ -53,9 +61,6 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
         // background
         gamePaint.paintScene();
 
-        // drawing map of bricks
-        mapPlay.draw((Graphics2D) graphics, theme.sceneContrast);
-
         gamePaint.paintSceneBorder();
         gamePaint.score(false);
         gamePaint.paddle(playerX, false);
@@ -63,9 +68,11 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
         gamePaint.ballScore(ballPosX, ballPosY);
 
         if (play == false) {
-            gamePaint.messageGameStart(false);
             gamePaint.ballHiding(ballPosX, ballPosY);
         } else {
+            // drawing map of bricks
+            mapPlay.draw((Graphics2D) graphics, theme.sceneContrast);
+
             gamePaint.ballGameStart(ballPosX, ballPosY);
         }
 
@@ -85,6 +92,10 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
             gamePaint.messageGameOver();
         }
 
+        if (play == false && !isTotalBricks && !isBallFallInDown) {
+            gamePaint.messageGameStart(false);
+        }
+
         if (isTotalBricks || isBallFallInDown) {
             gamePaint.messageGameRestart();
             gamePaint.score(true);
@@ -93,7 +104,6 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
             mapPlay.draw((Graphics2D) graphics, theme.scene);
 
             gamePaint.paddle(playerX, true);
-            gamePaint.messageGameStart(true);
         }
 
         graphics.dispose();
@@ -115,7 +125,8 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
                 moveLeft();
             }
         }
-        if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+
+        if (ke.getKeyCode() == KeyEvent.VK_ENTER || ke.getKeyCode() == KeyEvent.VK_1 || ke.getKeyCode() == KeyEvent.VK_2) {
             if (!play) {
                 play = true;
                 playerX = 310;
@@ -127,6 +138,14 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {  /
 
                 mapPlay = new MapGenerator(4, 10);
                 score = 0;
+
+                if (ke.getKeyCode() == KeyEvent.VK_1) {
+                    createTheme('1');
+                }
+
+                if (ke.getKeyCode() == KeyEvent.VK_2) {
+                    createTheme('2');
+                }
 
                 repaint();
             }

@@ -10,5 +10,7 @@ public class ThemeDefaultImpl extends AbstractTheme {
         this.secondary = Color.yellow;
         this.secondaryContrast = Color.orange;
         this.warning = Color.red;
+
+        this.bgImage = '1';
     }
 }
